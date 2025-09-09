@@ -1,0 +1,683 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende a Escribir Historias - Plataforma Educativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                }
+            },
+        }
+    };
+    </script>
+    <style>
+        :root {
+            --background: hsl(0 0% 100%);
+            --foreground: hsl(222.2 84% 4.9%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(222.2 84% 4.9%);
+            --primary: hsl(214 100% 40%);
+            --primary-foreground: hsl(210 40% 98%);
+            --secondary: hsl(210 40% 96%);
+            --secondary-foreground: hsl(222.2 84% 4.9%);
+            --muted: hsl(210 40% 96%);
+            --muted-foreground: hsl(215.4 16.3% 46.9%);
+            --accent: hsl(43 100% 52%);
+            --accent-foreground: hsl(222.2 84% 4.9%);
+            --border: hsl(214.3 31.8% 91.4%);
+            --input: hsl(214.3 31.8% 91.4%);
+            --ring: hsl(214 100% 40%);
+            --radius: 0.5rem;
+        }
+        
+        .dark {
+            --background: hsl(222.2 84% 4.9%);
+            --foreground: hsl(210 40% 98%);
+            --card: hsl(222.2 84% 4.9%);
+            --card-foreground: hsl(210 40% 98%);
+            --primary: hsl(214 100% 50%);
+            --primary-foreground: hsl(222.2 84% 4.9%);
+            --secondary: hsl(217.2 32.6% 17.5%);
+            --secondary-foreground: hsl(210 40% 98%);
+            --muted: hsl(217.2 32.6% 17.5%);
+            --muted-foreground: hsl(215 20.2% 65.1%);
+            --accent: hsl(43 100% 62%);
+            --accent-foreground: hsl(222.2 84% 4.9%);
+            --border: hsl(217.2 32.6% 17.5%);
+            --input: hsl(217.2 32.6% 17.5%);
+            --ring: hsl(214 100% 50%);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .prose {
+            line-height: 1.7;
+        }
+        
+        .writing-editor {
+            resize: none;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="bg-background text-foreground">
+    <!-- @COMPONENT: Header [navigation and user info] -->
+    <header class="bg-card border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-pen-fancy text-primary-foreground text-sm"></i>
+                    </div>
+                    <span class="text-xl font-semibold text-foreground">EscribirHistorias</span>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-primary font-medium">Inicio</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Mis Ejercicios</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Progreso</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Comunidad</a>
+                </nav>
+                
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div class="bg-secondary px-3 py-1 rounded-full text-sm text-secondary-foreground">
+                        Nivel: Principiante
+                    </div>
+                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                        <span class="text-accent-foreground text-sm font-medium">M</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <div class="flex">
+        <!-- @COMPONENT: Sidebar [navigation menu] -->
+        <aside class="w-64 bg-card border-r border-border h-screen sticky top-16 hidden lg:block">
+            <div class="p-6">
+                <!-- Progress Overview -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Tu Progreso</h3>
+                    <div class="space-y-4">
+                        <!-- Overall Progress -->
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-muted-foreground">Progreso General</span>
+                            <span class="text-sm font-medium">32%</span>
+                        </div>
+                        <div class="w-full bg-secondary rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 32%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="space-y-2">
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-3">Formatos</h4>
+                        
+                        <!-- Microrrelatos Section -->
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between p-3 bg-primary text-primary-foreground rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-bolt text-sm"></i>
+                                    <span class="font-medium">Microrrelatos</span>
+                                </div>
+                                <span class="text-xs bg-primary-foreground text-primary px-2 py-1 rounded-full">5/8</span>
+                            </div>
+                            
+                            <div class="ml-6 space-y-1">
+                                <a href="#" class="block p-2 text-sm text-foreground hover:bg-muted rounded transition-colors">
+                                    <i class="fas fa-check-circle text-green-500 mr-2"></i>¿Qué es un microrrelato?
+                                </a>
+                                <a href="#" class="block p-2 text-sm text-foreground hover:bg-muted rounded transition-colors">
+                                    <i class="fas fa-check-circle text-green-500 mr-2"></i>Estructura básica
+                                </a>
+                                <a href="#" class="block p-2 text-sm text-primary font-medium bg-muted rounded">
+                                    <i class="fas fa-play-circle mr-2"></i>Ejercicios prácticos
+                                </a>
+                                <a href="#" class="block p-2 text-sm text-muted-foreground rounded">
+                                    <i class="fas fa-lock mr-2"></i>El final sorpresa
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Cuentos Cortos -->
+                        <div class="space-y-1 mt-4">
+                            <div class="flex items-center justify-between p-3 bg-muted text-muted-foreground rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-book-open text-sm"></i>
+                                    <span class="font-medium">Cuentos Cortos</span>
+                                </div>
+                                <span class="text-xs bg-border text-muted-foreground px-2 py-1 rounded-full">0/12</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Novelas -->
+                        <div class="space-y-1 mt-4">
+                            <div class="flex items-center justify-between p-3 bg-muted text-muted-foreground rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-book text-sm"></i>
+                                    <span class="font-medium">Novelas</span>
+                                </div>
+                                <span class="text-xs bg-border text-muted-foreground px-2 py-1 rounded-full">0/20</span>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent [lesson content and exercises] -->
+        <main class="flex-1 p-6">
+            <div class="max-w-4xl mx-auto">
+                <!-- Breadcrumb -->
+                <div class="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
+                    <a href="#" class="hover:text-foreground transition-colors">Inicio</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <a href="#" class="hover:text-foreground transition-colors">Microrrelatos</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <span class="text-foreground">Ejercicios prácticos</span>
+                </div>
+
+                <!-- Lesson Header -->
+                <div class="bg-card border border-border rounded-lg p-8 mb-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h1 class="text-3xl font-bold mb-2">Ejercicios Prácticos de Microrrelatos</h1>
+                            <p class="text-lg text-muted-foreground">Aprende a crear historias poderosas en menos de 300 palabras</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-16 h-16 relative">
+                                <svg class="w-16 h-16 progress-ring">
+                                    <circle cx="32" cy="32" r="28" stroke="hsl(214.3 31.8% 91.4%)" stroke-width="4" fill="transparent"></circle>
+                                    <circle cx="32" cy="32" r="28" stroke="hsl(214 100% 40%)" stroke-width="4" fill="transparent" 
+                                            stroke-dasharray="176" stroke-dashoffset="70" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-sm font-semibold">60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lesson Progress -->
+                    <div class="flex items-center space-x-4 mt-6">
+                        <div class="flex-1">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Lección 3 de 8</span>
+                                <span>Tiempo estimado: 25 min</span>
+                            </div>
+                            <div class="w-full bg-secondary rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 37.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Main Content -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Theory Section -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-lightbulb text-accent mr-3"></i>
+                                Elementos Clave del Microrrelato
+                            </h2>
+                            <div class="prose max-w-none">
+                                <p class="text-muted-foreground mb-4">
+                                    Un microrrelato efectivo debe dominar estos tres elementos fundamentales:
+                                </p>
+                                <div class="grid gap-4">
+                                    <div class="flex items-start space-x-3 p-4 bg-muted rounded-lg">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <span class="text-xs text-primary-foreground font-semibold">1</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-1">Condensación</h4>
+                                            <p class="text-sm text-muted-foreground">Cada palabra cuenta. Elimina todo lo innecesario y mantén solo lo esencial.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3 p-4 bg-muted rounded-lg">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <span class="text-xs text-primary-foreground font-semibold">2</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-1">Impacto</h4>
+                                            <p class="text-sm text-muted-foreground">Debe generar una reacción emocional inmediata en el lector.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3 p-4 bg-muted rounded-lg">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <span class="text-xs text-primary-foreground font-semibold">3</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-1">Sorpresa</h4>
+                                            <p class="text-sm text-muted-foreground">Un giro inesperado que redefine toda la historia.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example Section -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-star text-accent mr-3"></i>
+                                Ejemplo Analizado
+                            </h3>
+                            <div class="bg-gradient-to-r from-secondary to-muted p-6 rounded-lg mb-4">
+                                <blockquote class="text-lg italic text-foreground font-medium leading-relaxed">
+                                    "Cuando despertó, el dinosaurio todavía estaba allí."
+                                </blockquote>
+                                <cite class="text-sm text-muted-foreground mt-2 block">— Augusto Monterroso</cite>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <p class="text-sm"><strong>Condensación:</strong> Solo 9 palabras que crean una historia completa.</p>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <p class="text-sm"><strong>Impacto:</strong> Genera curiosidad inmediata sobre el contexto.</p>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <p class="text-sm"><strong>Sorpresa:</strong> Subvierte expectativas sobre despertar y realidad.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Writing Exercise -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-pencil-alt text-accent mr-3"></i>
+                                Ejercicio: Crea tu Microrrelato
+                            </h3>
+                            
+                            <div class="mb-4 p-4 bg-accent/10 border border-accent/20 rounded-lg">
+                                <h4 class="font-semibold text-accent-foreground mb-2">Prompt de escritura:</h4>
+                                <p class="text-sm text-accent-foreground/80">
+                                    Escribe un microrrelato de máximo 50 palabras que comience con: 
+                                    <span class="font-medium">"El último mensaje en su teléfono decía..."</span>
+                                </p>
+                            </div>
+
+                            <!-- Text Editor -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Tu microrrelato:</label>
+                                    <textarea 
+                                        class="writing-editor w-full h-32 p-4 border border-input rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                                        placeholder="Escribe tu microrrelato aquí..."
+                                        data-mock="true"
+                                        data-implementation="Text editor with word count and auto-save functionality"
+                                    ></textarea>
+                                </div>
+                                
+                                <!-- Writing Stats -->
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-muted-foreground">Palabras: <span class="text-foreground font-medium" data-bind="wordCount">0</span>/50</span>
+                                        <span class="text-muted-foreground">Caracteres: <span class="text-foreground font-medium" data-bind="charCount">0</span></span>
+                                    </div>
+                                    <button class="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium">
+                                        <i class="fas fa-save mr-2"></i>Guardar Borrador
+                                    </button>
+                                </div>
+
+                                <!-- Submit Section -->
+                                <div class="flex items-center justify-between pt-4 border-t border-border">
+                                    <button class="text-muted-foreground hover:text-foreground transition-colors">
+                                        <i class="fas fa-history mr-2"></i>Ver versiones anteriores
+                                    </button>
+                                    <button class="bg-accent text-accent-foreground px-6 py-2 rounded-lg hover:bg-accent/90 transition-colors font-medium">
+                                        Enviar para Revisión
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="flex justify-between items-center">
+                            <button class="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Lección anterior</span>
+                            </button>
+                            <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium flex items-center space-x-2">
+                                <span>Siguiente lección</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Content -->
+                    <div class="space-y-6">
+                        <!-- Tips Card -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="font-semibold mb-4 flex items-center">
+                                <i class="fas fa-lightbulb text-accent mr-2"></i>
+                                Tips de Escritura
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-muted rounded-lg">
+                                    <p class="text-sm font-medium mb-1">Usa verbos activos</p>
+                                    <p class="text-xs text-muted-foreground">Evita la voz pasiva para mayor impacto</p>
+                                </div>
+                                <div class="p-3 bg-muted rounded-lg">
+                                    <p class="text-sm font-medium mb-1">Comienza in media res</p>
+                                    <p class="text-xs text-muted-foreground">Entra directo en la acción</p>
+                                </div>
+                                <div class="p-3 bg-muted rounded-lg">
+                                    <p class="text-sm font-medium mb-1">Final circular</p>
+                                    <p class="text-xs text-muted-foreground">Conecta el final con el inicio</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Card -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="font-semibold mb-4">Progreso del Módulo</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Lecciones completadas</span>
+                                    <span class="text-sm font-medium">5/8</span>
+                                </div>
+                                <div class="w-full bg-secondary rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 62.5%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Ejercicios enviados</span>
+                                    <span class="text-sm font-medium">3/8</span>
+                                </div>
+                                <div class="w-full bg-secondary rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 37.5%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Section -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="font-semibold mb-4 flex items-center">
+                                <i class="fas fa-users text-primary mr-2"></i>
+                                Comunidad
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-muted rounded-lg">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                            <span class="text-xs text-primary-foreground">A</span>
+                                        </div>
+                                        <span class="text-sm font-medium">Ana García</span>
+                                    </div>
+                                    <p class="text-xs text-muted-foreground">Compartió: "El espejo"</p>
+                                    <div class="flex items-center space-x-2 mt-2">
+                                        <i class="fas fa-heart text-red-500 text-xs"></i>
+                                        <span class="text-xs">12 me gusta</span>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-muted rounded-lg">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <div class="w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                                            <span class="text-xs text-accent-foreground">C</span>
+                                        </div>
+                                        <span class="text-sm font-medium">Carlos Ruiz</span>
+                                    </div>
+                                    <p class="text-xs text-muted-foreground">Completó el módulo</p>
+                                    <div class="flex items-center space-x-2 mt-2">
+                                        <i class="fas fa-trophy text-accent text-xs"></i>
+                                        <span class="text-xs">¡Felicitaciones!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resources -->
+                        <div class="bg-card border border-border rounded-lg p-6">
+                            <h3 class="font-semibold mb-4 flex items-center">
+                                <i class="fas fa-bookmark text-primary mr-2"></i>
+                                Recursos Útiles
+                            </h3>
+                            <div class="space-y-2">
+                                <a href="#" class="block p-2 text-sm text-primary hover:bg-muted rounded transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Antología de microrrelatos
+                                </a>
+                                <a href="#" class="block p-2 text-sm text-primary hover:bg-muted rounded transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Diccionario de sinónimos
+                                </a>
+                                <a href="#" class="block p-2 text-sm text-primary hover:bg-muted rounded transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Banco de prompts creativos
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Exercises Section -->
+                <div class="mt-8">
+                    <h2 class="text-2xl font-bold mb-6">Ejercicios Adicionales</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Exercise 1 -->
+                        <div class="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold">Ejercicio 1: Diálogo Mínimo</h4>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Completado</span>
+                            </div>
+                            <p class="text-sm text-muted-foreground mb-4">
+                                Crea un microrrelato usando únicamente diálogo. Máximo 75 palabras.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs text-muted-foreground">
+                                    <i class="fas fa-clock"></i>
+                                    <span>15 min</span>
+                                    <i class="fas fa-signal ml-2"></i>
+                                    <span>Intermedio</span>
+                                </div>
+                                <button class="text-primary hover:text-primary/80 transition-colors text-sm">
+                                    Ver mi envío <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 2 -->
+                        <div class="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold">Ejercicio 2: Una Sola Imagen</h4>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">En progreso</span>
+                            </div>
+                            <p class="text-sm text-muted-foreground mb-4">
+                                Describe una escena poderosa en exactamente 100 palabras.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs text-muted-foreground">
+                                    <i class="fas fa-clock"></i>
+                                    <span>20 min</span>
+                                    <i class="fas fa-signal ml-2"></i>
+                                    <span>Intermedio</span>
+                                </div>
+                                <button class="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm">
+                                    Continuar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 3 -->
+                        <div class="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold">Ejercicio 3: Reescribir un Clásico</h4>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">Bloqueado</span>
+                            </div>
+                            <p class="text-sm text-muted-foreground mb-4">
+                                Toma un cuento famoso y conviértelo en un microrrelato de 150 palabras.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs text-muted-foreground">
+                                    <i class="fas fa-clock"></i>
+                                    <span>30 min</span>
+                                    <i class="fas fa-signal ml-2"></i>
+                                    <span>Avanzado</span>
+                                </div>
+                                <button class="text-muted-foreground text-sm cursor-not-allowed">
+                                    <i class="fas fa-lock mr-1"></i>
+                                    Completar ejercicios anteriores
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 4 -->
+                        <div class="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold">Ejercicio 4: Tiempo y Espacio</h4>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">Bloqueado</span>
+                            </div>
+                            <p class="text-sm text-muted-foreground mb-4">
+                                Juega con el tiempo narrativo para crear una historia no lineal.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs text-muted-foreground">
+                                    <i class="fas fa-clock"></i>
+                                    <span>25 min</span>
+                                    <i class="fas fa-signal ml-2"></i>
+                                    <span>Avanzado</span>
+                                </div>
+                                <button class="text-muted-foreground text-sm cursor-not-allowed">
+                                    <i class="fas fa-lock mr-1"></i>
+                                    Completar ejercicios anteriores
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+
+    <!-- @COMPONENT: MobileMenu [responsive navigation] -->
+    <!-- Mobile Menu Button (visible on small screens) -->
+    <button class="fixed bottom-6 right-6 lg:hidden w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg flex items-center justify-center z-50">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Progress Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 lg:hidden">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium">Lección 3 de 8</span>
+            <span class="text-sm text-muted-foreground">60% completado</span>
+        </div>
+        <div class="w-full bg-secondary rounded-full h-2">
+            <div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: MobileMenu -->
+
+    <!-- @COMPONENT: FeedbackModal [exercise feedback overlay] -->
+    <!-- Hidden feedback modal for demonstration -->
+    <div class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50" id="feedbackModal">
+        <div class="bg-card rounded-lg p-6 m-4 max-w-md w-full border border-border">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">¡Ejercicio Completado!</h3>
+                <p class="text-muted-foreground mb-6">
+                    Excelente trabajo con tu microrrelato. Has capturado bien el elemento sorpresa.
+                </p>
+                <div class="space-y-3">
+                    <div class="bg-muted p-3 rounded-lg text-left">
+                        <p class="text-sm font-medium mb-1">Puntuación: 8.5/10</p>
+                        <p class="text-xs text-muted-foreground">Criterios: Originalidad, Impact, Técnica</p>
+                    </div>
+                    <button class="w-full bg-primary text-primary-foreground py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                        Continuar a la siguiente lección
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: FeedbackModal -->
+
+    <script>
+        // TODO: Implement word count functionality for text editor
+        // TODO: Implement auto-save functionality for drafts
+        // TODO: Implement progress tracking and state management
+        // TODO: Implement interactive feedback system
+        
+        (function() {
+            // Simple word counter demonstration
+            const textarea = document.querySelector('.writing-editor');
+            if (textarea) {
+                textarea.addEventListener('input', function() {
+                    const words = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    const chars = this.value.length;
+                    
+                    // Update counters (placeholder functionality)
+                    console.log(`Words: ${words}, Characters: ${chars}`);
+                });
+            }
+            
+            // Mobile menu toggle demonstration
+            const mobileMenuBtn = document.querySelector('.fixed.bottom-6.right-6 button');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    console.log('Mobile menu toggled');
+                    // TODO: Implement mobile menu overlay
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

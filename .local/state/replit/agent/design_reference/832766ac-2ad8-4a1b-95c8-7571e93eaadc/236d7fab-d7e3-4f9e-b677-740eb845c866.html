@@ -1,0 +1,632 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EscribeArte - Aprende a Crear Historias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["var(--font-sans)"],
+                }
+            },
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --radius: 8px;
+            --background: hsl(210 40% 98%);
+            --foreground: hsl(210 40% 8%);
+            --card: hsl(210 40% 100%);
+            --card-foreground: hsl(210 40% 10%);
+            --popover: hsl(210 40% 100%);
+            --popover-foreground: hsl(210 40% 8%);
+            --primary: hsl(221 83% 53%);
+            --primary-foreground: hsl(210 40% 98%);
+            --secondary: hsl(24 95% 53%);
+            --secondary-foreground: hsl(210 40% 98%);
+            --muted: hsl(210 40% 96%);
+            --muted-foreground: hsl(210 40% 45%);
+            --accent: hsl(262 83% 58%);
+            --accent-foreground: hsl(210 40% 98%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(210 40% 98%);
+            --border: hsl(210 40% 90%);
+            --input: hsl(210 40% 90%);
+            --ring: hsl(221 83% 53%);
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        .text-editor {
+            min-height: 300px;
+            resize: vertical;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .theme-terror { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+        .theme-amor { background: linear-gradient(135deg, #be185d, #ec4899); }
+        .theme-ciencia { background: linear-gradient(135deg, #075985, #0284c7); }
+        .theme-fantasia { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+        .theme-humor { background: linear-gradient(135deg, #ea580c, #fb923c); }
+        .theme-drama { background: linear-gradient(135deg, #374151, #6b7280); }
+        .theme-misterio { background: linear-gradient(135deg, #1f2937, #4b5563); }
+        .theme-realismo { background: linear-gradient(135deg, #059669, #10b981); }
+    </style>
+</head>
+<body class="bg-background text-foreground">
+    <!-- @COMPONENT: Header [navigation and user info] -->
+    <header class="bg-card border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-feather-alt text-primary text-2xl"></i>
+                        <h1 class="text-xl font-bold text-foreground">EscribeArte</h1>
+                    </div>
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="#dashboard" class="text-primary font-medium">Inicio</a>
+                        <a href="#microrrelatos" class="text-muted-foreground hover:text-foreground">Microrrelatos</a>
+                        <a href="#cuentos" class="text-muted-foreground hover:text-foreground">Cuentos Cortos</a>
+                        <a href="#novelas" class="text-muted-foreground hover:text-foreground">Novelas</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-primary-foreground text-sm font-medium" data-bind="user.initials">MU</span>
+                        </div>
+                        <span class="hidden sm:block text-sm font-medium" data-bind="user.name">María Usuario</span>
+                    </div>
+                    <button class="md:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <div class="flex min-h-screen">
+        <!-- @COMPONENT: Sidebar [navigation and progress] -->
+        <aside class="hidden lg:block w-80 bg-card border-r border-border">
+            <div class="p-6">
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold mb-4">Tu Progreso</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-muted-foreground">Progreso General</span>
+                            <span class="text-sm font-medium" data-bind="progress.overall">68%</span>
+                        </div>
+                        <div class="w-full bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 68%" data-bind="progress.overall"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="space-y-2">
+                    <div>
+                        <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Formatos de Historia</h3>
+                        
+                        <div class="space-y-1">
+                            <a href="#microrrelatos" class="flex items-center space-x-3 p-3 rounded-lg bg-primary/10 text-primary">
+                                <i class="fas fa-bolt text-lg"></i>
+                                <div class="flex-1">
+                                    <span class="font-medium">Microrrelatos</span>
+                                    <div class="text-xs opacity-75">8 temas disponibles</div>
+                                </div>
+                                <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                    <span class="text-primary-foreground text-xs">5</span>
+                                </div>
+                            </a>
+                            
+                            <a href="#cuentos" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted">
+                                <i class="fas fa-book-open text-lg text-muted-foreground"></i>
+                                <div class="flex-1">
+                                    <span class="font-medium">Cuentos Cortos</span>
+                                    <div class="text-xs text-muted-foreground">Técnicas narrativas</div>
+                                </div>
+                                <div class="w-6 h-6 bg-muted rounded-full flex items-center justify-center">
+                                    <span class="text-muted-foreground text-xs">2</span>
+                                </div>
+                            </a>
+                            
+                            <a href="#novelas" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted">
+                                <i class="fas fa-book text-lg text-muted-foreground"></i>
+                                <div class="flex-1">
+                                    <span class="font-medium">Novelas</span>
+                                    <div class="text-xs text-muted-foreground">Estructura completa</div>
+                                </div>
+                                <div class="w-6 h-6 bg-muted rounded-full flex items-center justify-center">
+                                    <span class="text-muted-foreground text-xs">0</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Herramientas</h3>
+                        <div class="space-y-1">
+                            <a href="#editor" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted">
+                                <i class="fas fa-edit text-lg text-muted-foreground"></i>
+                                <span class="font-medium">Editor de Práctica</span>
+                            </a>
+                            <a href="#prompts" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted">
+                                <i class="fas fa-lightbulb text-lg text-muted-foreground"></i>
+                                <span class="font-medium">Generador de Ideas</span>
+                            </a>
+                            <a href="#mis-escritos" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted">
+                                <i class="fas fa-folder text-lg text-muted-foreground"></i>
+                                <span class="font-medium">Mis Escritos</span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent [lessons and exercises] -->
+        <main class="flex-1 p-6 lg:p-8">
+            <!-- Breadcrumb Navigation -->
+            <nav class="mb-8">
+                <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <a href="#dashboard" class="hover:text-foreground">Inicio</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <a href="#microrrelatos" class="hover:text-foreground">Microrrelatos</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <span class="text-foreground">Tema: Terror</span>
+                </div>
+            </nav>
+
+            <!-- Current Lesson Section -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">Microrrelatos de Terror</h1>
+                        <p class="text-muted-foreground text-lg">Aprende a crear historias cortas que generen tensión y miedo en pocas palabras</p>
+                    </div>
+                    <div class="hidden lg:block">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 relative">
+                                    <svg class="w-16 h-16 progress-ring">
+                                        <circle cx="32" cy="32" r="28" stroke="hsl(var(--muted))" stroke-width="4" fill="none"></circle>
+                                        <circle cx="32" cy="32" r="28" stroke="hsl(var(--primary))" stroke-width="4" fill="none" 
+                                                stroke-dasharray="175.93" stroke-dashoffset="52.78" stroke-linecap="round"></circle>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="text-sm font-semibold" data-bind="lesson.progress">70%</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-muted-foreground mt-1">Completado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Selector -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Temas Disponibles</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- @MAP: themes.map(theme => ( -->
+                        <button class="theme-terror text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200 border-2 border-primary">
+                            <i class="fas fa-skull text-2xl mb-2"></i>
+                            <div class="font-medium">Terror</div>
+                            <div class="text-xs opacity-90">5/7 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-amor text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-heart text-2xl mb-2"></i>
+                            <div class="font-medium">Amor</div>
+                            <div class="text-xs opacity-90">2/6 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-ciencia text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-rocket text-2xl mb-2"></i>
+                            <div class="font-medium">Ciencia Ficción</div>
+                            <div class="text-xs opacity-90">0/8 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-fantasia text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-magic text-2xl mb-2"></i>
+                            <div class="font-medium">Fantasía</div>
+                            <div class="text-xs opacity-90">1/6 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-humor text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-laugh text-2xl mb-2"></i>
+                            <div class="font-medium">Humor</div>
+                            <div class="text-xs opacity-90">0/5 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-drama text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-theater-masks text-2xl mb-2"></i>
+                            <div class="font-medium">Drama</div>
+                            <div class="text-xs opacity-90">0/7 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-misterio text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-search text-2xl mb-2"></i>
+                            <div class="font-medium">Misterio</div>
+                            <div class="text-xs opacity-90">0/6 lecciones</div>
+                        </button>
+                        
+                        <button class="theme-realismo text-white p-4 rounded-lg text-center hover:scale-105 transition-transform duration-200">
+                            <i class="fas fa-eye text-2xl mb-2"></i>
+                            <div class="font-medium">Realismo Mágico</div>
+                            <div class="text-xs opacity-90">0/8 lecciones</div>
+                        </button>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+
+                <!-- Current Lesson Content -->
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Lesson Content -->
+                    <div class="space-y-6">
+                        <div class="bg-card rounded-lg p-6 border border-border">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                    <span class="text-primary-foreground text-sm font-medium">5</span>
+                                </div>
+                                <h3 class="text-xl font-semibold">El Giro Final Inesperado</h3>
+                            </div>
+                            
+                            <div class="prose prose-gray max-w-none">
+                                <p class="text-muted-foreground mb-4">
+                                    En los microrrelatos de terror, el giro final es crucial. Debe sorprender al lector 
+                                    y recontextualizar toda la historia en las últimas líneas.
+                                </p>
+                                
+                                <h4 class="text-lg font-semibold mb-3">Técnicas Principales:</h4>
+                                <ul class="space-y-2 text-muted-foreground">
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span><strong>Revelación de identidad:</strong> El narrador no es quien parece</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span><strong>Cambio temporal:</strong> La historia ocurre en otro tiempo</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span><strong>Inversión de realidad:</strong> Lo que creías real es falso</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-muted rounded-lg">
+                                <h5 class="font-medium mb-2">Ejemplo:</h5>
+                                <blockquote class="text-sm italic text-muted-foreground border-l-4 border-accent pl-4">
+                                    "Cada noche escucho pasos en el ático. Mi esposa dice que son ratones, 
+                                    pero yo sé que son del anterior inquilino. El que murió allí hace veinte años. 
+                                    El que era exactamente igual a mí."
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <!-- Exercise Section -->
+                        <div class="bg-card rounded-lg p-6 border border-border">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center space-x-2">
+                                <i class="fas fa-pencil-alt text-accent"></i>
+                                <span>Ejercicio Práctico</span>
+                            </h3>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium mb-2">Prompt de Escritura:</h4>
+                                <div class="p-4 bg-accent/10 rounded-lg border border-accent/20">
+                                    <p class="text-accent-foreground" data-mock="true">
+                                        Escribe un microrrelato de terror (máximo 100 palabras) sobre alguien que 
+                                        encuentra fotos de sí mismo en lugares donde nunca ha estado. 
+                                        Incluye un giro final inesperado.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Tu Microrrelato</label>
+                                    <textarea class="w-full p-4 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-editor resize-none" 
+                                              placeholder="Comienza a escribir tu microrrelato aquí..." 
+                                              data-implementation="Real-time word counter and auto-save functionality"></textarea>
+                                    <div class="flex justify-between items-center mt-2 text-sm text-muted-foreground">
+                                        <span data-bind="wordCount">Palabras: 0/100</span>
+                                        <span class="flex items-center space-x-1">
+                                            <i class="fas fa-save"></i>
+                                            <span data-bind="saveStatus">Guardado automáticamente</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex space-x-3">
+                                    <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors" 
+                                            data-event="click:submitExercise">
+                                        Enviar para Revisión
+                                    </button>
+                                    <button class="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary/90 transition-colors" 
+                                            data-event="click:generateNewPrompt">
+                                        Nuevo Prompt
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress and Navigation -->
+                    <div class="space-y-6">
+                        <!-- Lesson Navigation -->
+                        <div class="bg-card rounded-lg p-6 border border-border">
+                            <h3 class="text-lg font-semibold mb-4">Lecciones de Terror</h3>
+                            <div class="space-y-3">
+                                <!-- @MAP: lessons.map(lesson => ( -->
+                                <div class="flex items-center space-x-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-primary-foreground text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-primary">1. Introducción al Terror</span>
+                                        <div class="text-xs text-primary/70">Completado</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-primary-foreground text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-primary">2. Crear Atmósfera</span>
+                                        <div class="text-xs text-primary/70">Completado</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-primary-foreground text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-primary">3. Personajes Inquietantes</span>
+                                        <div class="text-xs text-primary/70">Completado</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-primary-foreground text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-primary">4. Tensión Narrativa</span>
+                                        <div class="text-xs text-primary/70">Completado</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg bg-accent/10 border border-accent">
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                                        <span class="text-accent-foreground text-sm font-bold">5</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-accent">5. El Giro Final Inesperado</span>
+                                        <div class="text-xs text-accent/70">En progreso</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg opacity-50">
+                                    <div class="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                                        <span class="text-muted-foreground text-sm font-bold">6</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-muted-foreground">6. Edición y Refinamiento</span>
+                                        <div class="text-xs text-muted-foreground">Bloqueado</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 rounded-lg opacity-50">
+                                    <div class="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                                        <span class="text-muted-foreground text-sm font-bold">7</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-medium text-muted-foreground">7. Proyecto Final</span>
+                                        <div class="text-xs text-muted-foreground">Bloqueado</div>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+
+                        <!-- Examples Section -->
+                        <div class="bg-card rounded-lg p-6 border border-border">
+                            <h3 class="text-lg font-semibold mb-4">Ejemplos Destacados</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-accent pl-4 py-2" data-mock="true">
+                                    <p class="text-sm font-medium mb-1">Por estudiante María G.</p>
+                                    <p class="text-sm text-muted-foreground italic">
+                                        "El espejo del baño se empañó solo. Escribí 'AYUDA' con el dedo. 
+                                        Cuando volví, alguien había añadido: 'NO PUEDO SALIR'."
+                                    </p>
+                                    <div class="flex items-center space-x-4 mt-2 text-xs text-muted-foreground">
+                                        <span><i class="fas fa-heart text-destructive"></i> 24 me gusta</span>
+                                        <span><i class="fas fa-comment"></i> 8 comentarios</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-l-4 border-secondary pl-4 py-2" data-mock="true">
+                                    <p class="text-sm font-medium mb-1">Por estudiante Carlos R.</p>
+                                    <p class="text-sm text-muted-foreground italic">
+                                        "Siempre duermo boca arriba. Esta mañana desperté boca abajo. 
+                                        Vivo solo en un quinto piso."
+                                    </p>
+                                    <div class="flex items-center space-x-4 mt-2 text-xs text-muted-foreground">
+                                        <span><i class="fas fa-heart text-destructive"></i> 31 me gusta</span>
+                                        <span><i class="fas fa-comment"></i> 12 comentarios</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Tips -->
+                        <div class="bg-gradient-to-r from-accent/10 to-primary/10 rounded-lg p-6 border border-accent/20">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center space-x-2">
+                                <i class="fas fa-lightbulb text-accent"></i>
+                                <span>Consejo del Día</span>
+                            </h3>
+                            <p class="text-muted-foreground" data-mock="true">
+                                En el terror psicológico, lo que <em>no</em> dices es tan importante como lo que sí dices. 
+                                Deja que la imaginación del lector complete los espacios en blanco.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex justify-between items-center pt-8 border-t border-border">
+                <button class="flex items-center space-x-2 px-6 py-3 text-muted-foreground hover:text-foreground transition-colors" 
+                        data-event="click:previousLesson">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Lección Anterior</span>
+                </button>
+                
+                <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <span>Lección 5 de 7</span>
+                </div>
+                
+                <button class="flex items-center space-x-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors" 
+                        data-event="click:nextLesson">
+                    <span>Siguiente Lección</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </main>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+
+    <!-- @COMPONENT: MobileMenu [responsive navigation] -->
+    <div class="lg:hidden fixed inset-0 bg-background z-50 transform translate-x-full transition-transform duration-300" id="mobile-menu" data-implementation="Toggle visibility with JavaScript">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold">Menú</h2>
+                <button id="close-menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <nav class="space-y-4">
+                <a href="#dashboard" class="block p-4 rounded-lg bg-primary text-primary-foreground">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-home"></i>
+                        <span class="font-medium">Inicio</span>
+                    </div>
+                </a>
+                
+                <a href="#microrrelatos" class="block p-4 rounded-lg border border-border">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-bolt"></i>
+                        <span class="font-medium">Microrrelatos</span>
+                    </div>
+                </a>
+                
+                <a href="#cuentos" class="block p-4 rounded-lg border border-border">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-book-open"></i>
+                        <span class="font-medium">Cuentos Cortos</span>
+                    </div>
+                </a>
+                
+                <a href="#novelas" class="block p-4 rounded-lg border border-border">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-book"></i>
+                        <span class="font-medium">Novelas</span>
+                    </div>
+                </a>
+            </nav>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: MobileMenu -->
+
+    <!-- @COMPONENT: FloatingActionButton [quick access to writing tools] -->
+    <button class="fixed bottom-6 right-6 w-14 h-14 bg-secondary text-secondary-foreground rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-200 lg:hidden" 
+            data-event="click:openQuickWrite">
+        <i class="fas fa-plus text-xl"></i>
+    </button>
+    <!-- @END_COMPONENT: FloatingActionButton -->
+
+    <script>
+        // TODO: Implement real functionality for menu toggles, progress tracking, and exercise submission
+        (function() {
+            // Basic mobile menu toggle
+            const menuButton = document.querySelector('[data-implementation*="Toggle"]');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenu = document.getElementById('close-menu');
+            
+            // Placeholder for menu functionality
+            // In real implementation, this would handle state management
+            
+            // Word counter for text editor
+            const textArea = document.querySelector('.text-editor');
+            if (textArea) {
+                // TODO: Implement real-time word counting and auto-save
+                // textArea.addEventListener('input', updateWordCount);
+            }
+            
+            // Progress tracking
+            // TODO: Implement progress persistence and calculation
+            
+            // Exercise submission
+            // TODO: Implement exercise validation and feedback system
+        })();
+    </script>
+</body>
+</html>
