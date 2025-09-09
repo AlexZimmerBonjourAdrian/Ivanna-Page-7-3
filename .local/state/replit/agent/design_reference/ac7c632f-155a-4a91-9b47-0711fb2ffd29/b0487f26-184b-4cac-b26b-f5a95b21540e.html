@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrativa Maestra - Aprende a Escribir Microrrelatos, Cuentos y Novelas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                }
+            }
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: hsl(45 50% 95%);
+            --foreground: hsl(20 14.3% 4.1%);
+            --card: hsl(45 50% 98%);
+            --card-foreground: hsl(20 14.3% 11%);
+            --primary: hsl(0 84% 60%);
+            --primary-foreground: hsl(60 9.1% 97.8%);
+            --secondary: hsl(43 96% 56%);
+            --secondary-foreground: hsl(20 14.3% 4.1%);
+            --muted: hsl(43 30% 85%);
+            --muted-foreground: hsl(25 5.3% 44.7%);
+            --accent: hsl(25 95% 62%);
+            --accent-foreground: hsl(60 9.1% 97.8%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(60 9.1% 97.8%);
+            --border: hsl(20 5.9% 90%);
+            --input: hsl(20 5.9% 90%);
+            --ring: hsl(25 95% 62%);
+            --radius: 0.75rem;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(25 95% 62%) 50%, hsl(43 96% 56%) 100%);
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, hsl(43 96% 56% / 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, hsl(0 84% 60% / 0.1) 0%, transparent 50%);
+        }
+        
+        .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .font-body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .quote-block {
+            border-left: 4px solid var(--primary);
+            background: linear-gradient(to right, hsl(0 84% 60% / 0.05), transparent);
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-body">
+    <!-- @COMPONENT: Header -->
+    <header class="gradient-bg shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <span class="text-2xl">📚</span>
+                    </div>
+                    <h1 class="text-2xl font-heading font-bold text-white">Narrativa Maestra</h1>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#microrrelatos" class="text-white hover:text-yellow-200 transition-colors font-medium">Microrrelatos</a>
+                    <a href="#cuentos" class="text-white hover:text-yellow-200 transition-colors font-medium">Cuentos Cortos</a>
+                    <a href="#novelas" class="text-white hover:text-yellow-200 transition-colors font-medium">Novelas</a>
+                    <a href="#errores" class="text-white hover:text-yellow-200 transition-colors font-medium">Errores Comunes</a>
+                    <a href="#practicas" class="text-white hover:text-yellow-200 transition-colors font-medium">Mejores Prácticas</a>
+                </nav>
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section class="gradient-bg hero-pattern py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-heading font-bold text-white mb-6">
+                Domina el Arte de Contar Historias
+            </h2>
+            <p class="text-xl text-yellow-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Desde microrrelatos que cautivan en segundos hasta novelas épicas que marcan generaciones. 
+                Aprende las técnicas de los grandes maestros de la literatura mundial.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-primary font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors transform hover:scale-105">
+                    Comenzar Aprendizaje
+                </button>
+                <button class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-primary transition-colors">
+                    Ver Ejemplos
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: Navigation Tabs -->
+    <section class="bg-card py-6 border-b border-border">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#microrrelatos" class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                    🌟 Microrrelatos
+                </a>
+                <a href="#cuentos" class="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary/90 transition-colors">
+                    📖 Cuentos Cortos  
+                </a>
+                <a href="#novelas" class="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-colors">
+                    📚 Novelas
+                </a>
+                <a href="#ejemplos" class="bg-muted text-muted-foreground px-6 py-3 rounded-lg font-medium hover:bg-muted/80 transition-colors">
+                    ✨ Ejemplos Literarios
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Navigation Tabs -->
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <!-- @COMPONENT: Microrrelatos Section -->
+        <section id="microrrelatos" class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-heading font-bold text-foreground mb-4">
+                    🌟 El Poder de los Microrrelatos
+                </h3>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Historias completas en menos de 300 palabras. Aprende a crear impacto narrativo en el mínimo espacio posible.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <h4 class="text-2xl font-heading font-bold text-primary mb-4">¿Qué es un Microrrelato?</h4>
+                    <div class="space-y-4 text-card-foreground">
+                        <p>Un microrrelato es una forma narrativa extremadamente breve que contiene todos los elementos de una historia completa: personajes, conflicto, desarrollo y resolución.</p>
+                        <div class="bg-primary/10 p-4 rounded-lg">
+                            <h5 class="font-semibold text-primary mb-2">Características Esenciales:</h5>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Brevedad extrema (50-300 palabras)</li>
+                                <li>Intensidad narrativa concentrada</li>
+                                <li>Final sorprendente o revelador</li>
+                                <li>Economía lingüística precisa</li>
+                                <li>Universo narrativo completo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <h4 class="text-2xl font-heading font-bold text-accent mb-4">Ejemplo Magistral</h4>
+                    <div class="quote-block pl-6 py-4 mb-4">
+                        <p class="italic text-lg mb-2">"Cuando despertó, el dinosaurio todavía estaba allí."</p>
+                        <p class="text-sm font-semibold text-primary">— Augusto Monterroso, "El Dinosaurio"</p>
+                    </div>
+                    <div class="bg-secondary/10 p-4 rounded-lg">
+                        <h5 class="font-semibold text-secondary mb-2">¿Por qué Funciona?</h5>
+                        <ul class="text-sm space-y-2">
+                            <li>• <strong>Misterio inmediato:</strong> ¿Quién despertó? ¿Qué dinosaurio?</li>
+                            <li>• <strong>Ambigüedad deliberada:</strong> Múltiples interpretaciones posibles</li>
+                            <li>• <strong>Economía perfecta:</strong> Cada palabra es esencial</li>
+                            <li>• <strong>Impacto duradero:</strong> Se queda en la memoria del lector</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-8">
+                <h4 class="text-2xl font-heading font-bold text-foreground mb-6">Técnicas de Escritura para Microrrelatos</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h5 class="font-semibold text-primary mb-2">🎯 In Media Res</h5>
+                            <p class="text-sm">Comienza en medio de la acción. No hay espacio para introducciones largas.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h5 class="font-semibold text-accent mb-2">💥 Final de Impacto</h5>
+                            <p class="text-sm">El final debe redefinir toda la historia anterior y sorprender al lector.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h5 class="font-semibold text-secondary mb-2">🔍 Precisión Léxica</h5>
+                            <p class="text-sm">Cada palabra debe tener un propósito. No hay lugar para la redundancia.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h5 class="font-semibold text-primary mb-2">🌊 Subtexto Profundo</h5>
+                            <p class="text-sm">Lo no dicho es tan importante como lo dicho. El lector debe completar la historia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: Microrrelatos Section -->
+
+        <!-- @COMPONENT: Cuentos Cortos Section -->
+        <section id="cuentos" class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-heading font-bold text-foreground mb-4">
+                    📖 Maestría en Cuentos Cortos
+                </h3>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    El equilibrio perfecto entre brevedad e intensidad. Desarrolla personajes memorables y tramas cautivadoras en el formato favorito de los grandes maestros.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <div class="section-card bg-card rounded-xl p-6 shadow-lg border border-border">
+                    <div class="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-secondary mb-3">Estructura Clásica</h4>
+                    <ul class="space-y-2 text-sm text-card-foreground">
+                        <li>• <strong>Planteamiento:</strong> Presenta el mundo y el conflicto</li>
+                        <li>• <strong>Nudo:</strong> Desarrolla la tensión narrativa</li>
+                        <li>• <strong>Desenlace:</strong> Resuelve con impacto emocional</li>
+                    </ul>
+                </div>
+
+                <div class="section-card bg-card rounded-xl p-6 shadow-lg border border-border">
+                    <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-accent mb-3">Desarrollo de Personajes</h4>
+                    <ul class="space-y-2 text-sm text-card-foreground">
+                        <li>• <strong>Protagonista definido:</strong> Objetivo claro y motivación</li>
+                        <li>• <strong>Arco emocional:</strong> Transformación del personaje</li>
+                        <li>• <strong>Voz única:</strong> Estilo narrativo distintivo</li>
+                    </ul>
+                </div>
+
+                <div class="section-card bg-card rounded-xl p-6 shadow-lg border border-border">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎭</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-primary mb-3">Técnicas Narrativas</h4>
+                    <ul class="space-y-2 text-sm text-card-foreground">
+                        <li>• <strong>Punto de vista:</strong> Primera, segunda o tercera persona</li>
+                        <li>• <strong>Tiempo narrativo:</strong> Flashbacks y prospecciones</li>
+                        <li>• <strong>Atmósfera:</strong> Ambientación y tono</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Literary Examples for Short Stories -->
+            <div class="bg-card rounded-xl p-8 shadow-lg border border-border mb-8">
+                <h4 class="text-2xl font-heading font-bold text-foreground mb-6">Ejemplos Maestros de Cuentos Cortos</h4>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="quote-block pl-6 py-4 mb-4">
+                            <h5 class="font-bold text-primary text-lg mb-2">"La Casa de Asterión" - Jorge Luis Borges</h5>
+                            <p class="italic mb-2">"Sé que me acusan de soberbia, y tal vez de misantropía, y tal vez de locura..."</p>
+                        </div>
+                        <div class="bg-primary/10 p-4 rounded-lg">
+                            <h6 class="font-semibold text-primary mb-2">¿Por qué es magistral?</h6>
+                            <ul class="text-sm space-y-1">
+                                <li>• <strong>Narrador no confiable:</strong> El minotauro cuenta su propia historia</li>
+                                <li>• <strong>Perspectiva única:</strong> Humaniza al "monstruo" mitológico</li>
+                                <li>• <strong>Revelación gradual:</strong> La verdad se revela lentamente</li>
+                                <li>• <strong>Economía narrativa:</strong> Máximo impacto en mínimo espacio</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="quote-block pl-6 py-4 mb-4">
+                            <h5 class="font-bold text-accent text-lg mb-2">"La Lotería" - Shirley Jackson</h5>
+                            <p class="italic mb-2">"Bobby Martin ya había llenado sus bolsillos de piedras..."</p>
+                        </div>
+                        <div class="bg-accent/10 p-4 rounded-lg">
+                            <h6 class="font-semibold text-accent mb-2">Técnicas magistrales:</h6>
+                            <ul class="text-sm space-y-1">
+                                <li>• <strong>Falsa normalidad:</strong> Ambiente aparentemente cotidiano</li>
+                                <li>• <strong>Tensión creciente:</strong> Detalles inquietantes sutiles</li>
+                                <li>• <strong>Final devastador:</strong> Revela la verdadera naturaleza ritual</li>
+                                <li>• <strong>Crítica social:</strong> Cuestiona tradiciones ciegas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: Cuentos Cortos Section -->
+
+        <!-- @COMPONENT: Novelas Section -->
+        <section id="novelas" class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-heading font-bold text-foreground mb-4">
+                    📚 El Arte de la Novela
+                </h3>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Construye mundos complejos, personajes profundos y tramas épicas. Domina la forma narrativa más ambiciosa y rewarding de la literatura.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Novel Structure -->
+                <div class="bg-gradient-to-r from-secondary/10 via-accent/10 to-primary/10 rounded-xl p-8">
+                    <h4 class="text-2xl font-heading font-bold text-foreground mb-6">Estructura Narrativa de Novela</h4>
+                    <div class="grid lg:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🚀</span>
+                            </div>
+                            <h5 class="font-bold text-secondary mb-2">Acto I: Planteamiento</h5>
+                            <p class="text-sm text-gray-600">Introducción del mundo, personajes y conflicto central. Hook inicial y primer punto de giro.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">⚔️</span>
+                            </div>
+                            <h5 class="font-bold text-accent mb-2">Acto II-A: Desarrollo</h5>
+                            <p class="text-sm text-gray-600">Obstáculos crecientes, desarrollo de subtramas, exploración del mundo narrativo.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🌋</span>
+                            </div>
+                            <h5 class="font-bold text-primary mb-2">Acto II-B: Confrontación</h5>
+                            <p class="text-sm text-gray-600">Crisis mayor, punto de no retorno, máxima tensión antes del clímax.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🏆</span>
+                            </div>
+                            <h5 class="font-bold text-secondary mb-2">Acto III: Resolución</h5>
+                            <p class="text-sm text-gray-600">Clímax, resolución del conflicto, epílogo y nuevo equilibrio narrativo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Development -->
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h4 class="text-2xl font-heading font-bold text-primary mb-4">Arcos de Personajes Complejos</h4>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-primary pl-4">
+                                <h5 class="font-semibold text-primary mb-1">Protagonista Dinámico</h5>
+                                <p class="text-sm text-muted-foreground">Evolución clara desde el estado inicial hasta la transformación final. Motivación profunda y conflicto interno.</p>
+                            </div>
+                            <div class="border-l-4 border-accent pl-4">
+                                <h5 class="font-semibold text-accent mb-1">Personajes Secundarios</h5>
+                                <p class="text-sm text-muted-foreground">Cada personaje debe servir a la trama principal, tener objetivos propios y aportar perspectiva única.</p>
+                            </div>
+                            <div class="border-l-4 border-secondary pl-4">
+                                <h5 class="font-semibold text-secondary mb-1">Antagonistas Memorables</h5>
+                                <p class="text-sm text-muted-foreground">Motivaciones comprensibles, métodos únicos, y representación de valores opuestos al protagonista.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h4 class="text-2xl font-heading font-bold text-accent mb-4">Elementos de Worldbuilding</h4>
+                        <div class="space-y-4">
+                            <div class="bg-accent/10 p-4 rounded-lg">
+                                <h5 class="font-semibold text-accent mb-2">🌍 Construcción del Mundo</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Reglas consistentes del universo narrativo</li>
+                                    <li>• Historia y cultura del mundo</li>
+                                    <li>• Geografía y ambientación detallada</li>
+                                    <li>• Sistemas sociales y políticos</li>
+                                </ul>
+                            </div>
+                            <div class="bg-primary/10 p-4 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-2">🔧 Herramientas Narrativas</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Múltiples puntos de vista</li>
+                                    <li>• Subtramas entrelazadas</li>
+                                    <li>• Simbolismo y motivos recurrentes</li>
+                                    <li>• Ritmo y pacing narrativo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Famous Novel Examples -->
+                <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <h4 class="text-2xl font-heading font-bold text-foreground mb-6">Ejemplos Magistrales de Novelas</h4>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="quote-block pl-6 py-4 mb-4">
+                                <h5 class="font-bold text-primary text-xl mb-2">"Cien Años de Soledad" - Gabriel García Márquez</h5>
+                                <p class="italic mb-2">"Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota..."</p>
+                            </div>
+                            <div class="bg-primary/10 p-4 rounded-lg">
+                                <h6 class="font-semibold text-primary mb-2">Técnicas magistrales:</h6>
+                                <ul class="text-sm space-y-1">
+                                    <li>• <strong>Realismo mágico:</strong> Fusiona lo real y lo fantástico</li>
+                                    <li>• <strong>Estructura cíclica:</strong> La historia se repite en generaciones</li>
+                                    <li>• <strong>Múltiples generaciones:</strong> Saga familiar épica</li>
+                                    <li>• <strong>Lenguaje poético:</strong> Prosa musical y evocadora</li>
+                                    <li>• <strong>Alegoría histórica:</strong> Crítica de la historia latinoamericana</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="quote-block pl-6 py-4 mb-4">
+                                <h5 class="font-bold text-accent text-xl mb-2">"1984" - George Orwell</h5>
+                                <p class="italic mb-2">"Era un día luminoso y frío de abril y los relojes daban las trece..."</p>
+                            </div>
+                            <div class="bg-accent/10 p-4 rounded-lg">
+                                <h6 class="font-semibold text-accent mb-2">Elementos innovadores:</h6>
+                                <ul class="text-sm space-y-1">
+                                    <li>• <strong>Distopía totalitaria:</strong> Mundo coherentemente opresivo</li>
+                                    <li>• <strong>Neologismos:</strong> "Newspeak", "doublethink", "Big Brother"</li>
+                                    <li>• <strong>Alegoría política:</strong> Crítica al totalitarismo</li>
+                                    <li>• <strong>Estructura progresiva:</strong> Desesperanza creciente</li>
+                                    <li>• <strong>Influencia cultural:</strong> Conceptos integrados al lenguaje</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: Novelas Section -->
+
+        <!-- @COMPONENT: Common Errors Section -->
+        <section id="errores" class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-heading font-bold text-foreground mb-4">
+                    ⚠️ Errores Comunes y Cómo Evitarlos
+                </h3>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Aprende de los errores más frecuentes en escritores principiantes y descubre cómo transformarlos en fortalezas narrativas.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Microrrelato Errors -->
+                <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">🌟</span>
+                        </div>
+                        <h4 class="text-2xl font-heading font-bold text-primary">Errores en Microrrelatos</h4>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-red-700 mb-2">❌ Exceso de información</h5>
+                            <p class="text-sm text-red-600 mb-2">Tratar de explicar demasiado contexto o background</p>
+                            <p class="text-xs text-red-500 italic">"Juan, de 34 años, contador desde hace 12 años en la empresa familiar..."</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ Solución: Sugiere, no expliques</h5>
+                            <p class="text-sm text-green-600 mb-2">Deja que el lector complete la información</p>
+                            <p class="text-xs text-green-500 italic">"Juan ajustó su corbata antes de entrar a la oficina por última vez."</p>
+                        </div>
+
+                        <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-red-700 mb-2">❌ Final predecible</h5>
+                            <p class="text-sm text-red-600">El lector puede anticipar el desenlace desde el primer párrafo</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ Solución: Pistas sutiles y giro inesperado</h5>
+                            <p class="text-sm text-green-600">Planta pistas que cobran sentido solo al final</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short Story Errors -->
+                <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">📖</span>
+                        </div>
+                        <h4 class="text-2xl font-heading font-bold text-accent">Errores en Cuentos Cortos</h4>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-red-700 mb-2">❌ Múltiples conflictos sin resolver</h5>
+                            <p class="text-sm text-red-600 mb-2">Introducir demasiadas subtramas en poco espacio</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ Solución: Un conflicto central bien desarrollado</h5>
+                            <p class="text-sm text-green-600">Enfócate en una línea narrativa principal con impacto emocional</p>
+                        </div>
+
+                        <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-red-700 mb-2">❌ Personajes planos</h5>
+                            <p class="text-sm text-red-600">Protagonistas sin motivación clara o desarrollo</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ Solución: Arco emocional definido</h5>
+                            <p class="text-sm text-green-600">El personaje debe cambiar durante la historia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novel Errors -->
+                <div class="section-card bg-card rounded-xl p-8 shadow-lg border border-border lg:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl">📚</span>
+                        </div>
+                        <h4 class="text-2xl font-heading font-bold text-secondary">Errores Críticos en Novelas</h4>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-red-700 mb-2">❌ Segundo acto flácido</h5>
+                                <p class="text-sm text-red-600">La mitad de la novela pierde ritmo y dirección</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-green-700 mb-2">✅ Subtramas y mini-clímax</h5>
+                                <p class="text-sm text-green-600">Mantén la tensión con revelaciones y obstáculos regulares</p>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-red-700 mb-2">❌ Inconsistencias en el worldbuilding</h5>
+                                <p class="text-sm text-red-600">Reglas del mundo que cambian sin explicación</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-green-700 mb-2">✅ Biblia del mundo narrativo</h5>
+                                <p class="text-sm text-green-600">Documento con reglas, historia y lógica interna consistente</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-red-700 mb-2">❌ Demasiados puntos de vista</h5>
+                                <p class="text-sm text-red-600">Múltiples POV que confunden al lector</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-green-700 mb-2">✅ POV estratégico y limitado</h5>
+                                <p class="text-sm text-green-600">Cada POV debe aportar información única e importante</p>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-red-700 mb-2">❌ Resolución apresurada</h5>
+                                <p class="text-sm text-red-600">Todos los conflictos se resuelven en las últimas páginas</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
+                                <h5 class="font-semibold text-green-700 mb-2">✅ Resolución gradual y satisfactoria</h5>
+                                <p class="text-sm text-green-600">El clímax resuelve el conflicto central, el epílogo las subtramas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: Common Errors Section -->
+
+        <!-- @COMPONENT: Best Practices Section -->
+        <section id="practicas" class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-heading font-bold text-foreground mb-4">
+                    🏆 Mejores Prácticas de Escritura
+                </h3>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Técnicas probadas por los grandes maestros de la literatura mundial. Convierte tu escritura amateur en prosa profesional.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <!-- Universal Practices -->
+                <div class="section-card bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-8 shadow-lg border border-border">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">✍️</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-primary text-center mb-6">Prácticas Universales</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Escribir todos los días</h5>
+                            <p class="text-xs text-muted-foreground">Aunque sean 100 palabras. La constancia desarrolla el estilo.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Leer en tu género</h5>
+                            <p class="text-xs text-muted-foreground">Analiza cómo los maestros resuelven problemas narrativos.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Revisar sin piedad</h5>
+                            <p class="text-xs text-muted-foreground">El primer borrador es solo el comienzo del proceso.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Conocer a tus personajes</h5>
+                            <p class="text-xs text-muted-foreground">Comprende sus motivaciones más profundas y traumas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Excellence -->
+                <div class="section-card bg-gradient-to-br from-accent/10 to-secondary/10 rounded-xl p-8 shadow-lg border border-border">
+                    <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🔧</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-accent text-center mb-6">Excelencia Técnica</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Show, don't tell</h5>
+                            <p class="text-xs text-muted-foreground">Muestra emociones a través de acciones, no descripciones.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Diálogo auténtico</h5>
+                            <p class="text-xs text-muted-foreground">Cada personaje debe tener una voz distintiva y natural.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Economía narrativa</h5>
+                            <p class="text-xs text-muted-foreground">Cada frase debe servir a la trama, personaje o atmósfera.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Ritmo variable</h5>
+                            <p class="text-xs text-muted-foreground">Alterna momentos de tensión con pausas reflexivas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Tips -->
+                <div class="section-card bg-gradient-to-br from-secondary/10 to-primary/10 rounded-xl p-8 shadow-lg border border-border">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🎯</span>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-secondary text-center mb-6">Consejos Profesionales</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Tema profundo</h5>
+                            <p class="text-xs text-muted-foreground">Tu historia debe explorar algo significativo sobre la condición humana.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Subtexto potente</h5>
+                            <p class="text-xs text-muted-foreground">Lo no dicho es tan importante como lo dicho.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Final inevitable</h5>
+                            <p class="text-xs text-muted-foreground">Sorpresivo pero lógico. El lector debe sentir que no podía ser de otra manera.</p>
+                        </div>
+                        <div class="bg-white/50 p-3 rounded-lg">
+                            <h5 class="font-semibold text-foreground mb-1">Voz única</h5>
+                            <p class="text-xs text-muted-foreground">Desarrolla un estilo distintivo que sea reconociblemente tuyo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master's Quotes Section -->
+            <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                <h4 class="text-2xl font-heading font-bold text-foreground text-center mb-8">Sabiduría de los Maestros</h4>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="quote-block pl-6 py-6">
+                        <p class="text-lg italic mb-4 text-foreground">"Escribe borracho, edita sobrio."</p>
+                        <p class="font-semibold text-primary">— Ernest Hemingway</p>
+                        <p class="text-sm text-muted-foreground mt-2">La creatividad fluye libremente en el primer borrador, pero la precisión viene con la revisión meticulosa.</p>
+                    </div>
+
+                    <div class="quote-block pl-6 py-6">
+                        <p class="text-lg italic mb-4 text-foreground">"No hay reglas para escribir ficción, solo principios útiles."</p>
+                        <p class="font-semibold text-accent">— Joyce Carol Oates</p>
+                        <p class="text-sm text-muted-foreground mt-2">Las técnicas son herramientas, no restricciones. Úsalas cuando sirvan a tu historia.</p>
+                    </div>
+
+                    <div class="quote-block pl-6 py-6">
+                        <p class="text-lg italic mb-4 text-foreground">"Mata a tus amados."</p>
+                        <p class="font-semibold text-secondary">— William Faulkner</p>
+                        <p class="text-sm text-muted-foreground mt-2">Elimina esas frases hermosas que no sirven a la historia. La belleza debe servir al propósito.</p>
+                    </div>
+
+                    <div class="quote-block pl-6 py-6">
+                        <p class="text-lg italic mb-4 text-foreground">"La primera frase ya está diciendo todo."</p>
+                        <p class="font-semibold text-primary">— Joan Didion</p>
+                        <p class="text-sm text-muted-foreground mt-2">El tono, estilo y dirección de tu historia se establece desde las primeras palabras.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- @END_COMPONENT: Best Practices Section -->
+
+    </main>
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="gradient-bg py-12 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-8 text-white">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">📚</span>
+                        </div>
+                        <h5 class="text-xl font-heading font-bold">Narrativa Maestra</h5>
+                    </div>
+                    <p class="text-yellow-100 text-sm leading-relaxed">
+                        Tu guía completa para dominar el arte de contar historias, desde microrrelatos hasta novelas épicas.
+                    </p>
+                </div>
+                
+                <div>
+                    <h6 class="font-heading font-bold mb-4">Formatos Narrativos</h6>
+                    <ul class="space-y-2 text-yellow-100 text-sm">
+                        <li><a href="#microrrelatos" class="hover:text-white transition-colors">Microrrelatos</a></li>
+                        <li><a href="#cuentos" class="hover:text-white transition-colors">Cuentos Cortos</a></li>
+                        <li><a href="#novelas" class="hover:text-white transition-colors">Novelas</a></li>
+                        <li><a href="#ejemplos" class="hover:text-white transition-colors">Ejemplos Literarios</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h6 class="font-heading font-bold mb-4">Recursos de Aprendizaje</h6>
+                    <ul class="space-y-2 text-yellow-100 text-sm">
+                        <li><a href="#errores" class="hover:text-white transition-colors">Errores Comunes</a></li>
+                        <li><a href="#practicas" class="hover:text-white transition-colors">Mejores Prácticas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Ejercicios de Escritura</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Análisis Literario</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h6 class="font-heading font-bold mb-4">Comunidad</h6>
+                    <ul class="space-y-2 text-yellow-100 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Blog de Escritura</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Foro de Escritores</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Talleres Online</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-yellow-100 text-sm">
+                    © 2024 Narrativa Maestra. Despertando el escritor que llevas dentro.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // Smooth scrolling for navigation links
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // Add active state to navigation tabs based on scroll position
+        (function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+
+            function updateActiveNav() {
+                let currentSection = '';
+                const scrollY = window.pageYOffset;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('bg-primary/20');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('bg-primary/20');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNav);
+        })();
+    </script>
+</body>
+</html>
