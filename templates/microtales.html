@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microrrelatos - Mundo de Historias</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-magic me-2"></i>
+                <span class="brand-text">Mundo de Historias</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('microtales') }}">Microrrelatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('story_formats') }}">Formatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('interactive_guide') }}">Guía Interactiva</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="microtales-hero">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="hero-content-microtales">
+                        <i class="fas fa-feather-alt hero-icon"></i>
+                        <h1 class="hero-title">Microrrelatos</h1>
+                        <p class="hero-subtitle">El arte de contar historias completas en pocas palabras</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What are Microtales -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="content-card">
+                        <h2 class="section-title text-center mb-4">¿Qué son los Microrrelatos?</h2>
+                        <p class="lead text-center mb-4">
+                            Los microrrelatos son narraciones extremadamente breves que cuentan una historia completa 
+                            en muy pocas palabras, generalmente entre 1 y 300 palabras.
+                        </p>
+                        
+                        <div class="row g-4 mt-4">
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <i class="fas fa-compress-alt"></i>
+                                    <h4>Brevedad</h4>
+                                    <p>Máximo impacto en mínimas palabras</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <i class="fas fa-bolt"></i>
+                                    <h4>Intensidad</h4>
+                                    <p>Cada palabra cuenta y tiene propósito</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <i class="fas fa-surprise"></i>
+                                    <h4>Sorpresa</h4>
+                                    <p>Final inesperado que impacta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Ejemplos de Microrrelatos</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="microtale-card">
+                        <div class="microtale-header">
+                            <h4>El Último Humano</h4>
+                            <span class="word-count">15 palabras</span>
+                        </div>
+                        <div class="microtale-content">
+                            <p>"Después del apocalipsis, el último humano en la Tierra murió. Al día siguiente, alguien tocó su puerta."</p>
+                        </div>
+                        <div class="microtale-analysis">
+                            <h5>Análisis:</h5>
+                            <ul>
+                                <li><strong>Paradoja:</strong> Crea tension mediante una contradicción aparente</li>
+                                <li><strong>Misterio:</strong> ¿Quién toca la puerta si no hay nadie más?</li>
+                                <li><strong>Economía:</strong> Cada palabra es esencial para el impacto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="microtale-card">
+                        <div class="microtale-header">
+                            <h4>El Espejo</h4>
+                            <span class="word-count">22 palabras</span>
+                        </div>
+                        <div class="microtale-content">
+                            <p>"Se despertó y se miró al espejo. Su reflejo le sonrió primero. Desde ese día, nunca más volvió a mirarse al espejo."</p>
+                        </div>
+                        <div class="microtale-analysis">
+                            <h5>Análisis:</h5>
+                            <ul>
+                                <li><strong>Terror sutil:</strong> El horror viene de lo familiar</li>
+                                <li><strong>Progresión:</strong> Situación normal → elemento extraño → consecuencia</li>
+                                <li><strong>Implicación:</strong> El lector completa la historia mentalmente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="microtale-card">
+                        <div class="microtale-header">
+                            <h4>Viaje en el Tiempo</h4>
+                            <span class="word-count">18 palabras</span>
+                        </div>
+                        <div class="microtale-content">
+                            <p>"Inventé la máquina del tiempo. Fui al pasado para conocerme. Mi yo del pasado ya me esperaba."</p>
+                        </div>
+                        <div class="microtale-analysis">
+                            <h5>Análisis:</h5>
+                            <ul>
+                                <li><strong>Paradoja temporal:</strong> Causa y efecto se confunden</li>
+                                <li><strong>Círculo cerrado:</strong> El final conecta con el principio</li>
+                                <li><strong>Ciencia ficción:</strong> Concepto complejo en pocas palabras</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="microtale-card">
+                        <div class="microtale-header">
+                            <h4>La Carta</h4>
+                            <span class="word-count">25 palabras</span>
+                        </div>
+                        <div class="microtale-content">
+                            <p>"Escribió una carta de amor todos los días durante cincuenta años. El día que ella respondió, él ya no recordaba quién era."</p>
+                        </div>
+                        <div class="microtale-analysis">
+                            <h5>Análisis:</h5>
+                            <ul>
+                                <li><strong>Ironía trágica:</strong> El deseo se cumple demasiado tarde</li>
+                                <li><strong>Tiempo:</strong> El paso del tiempo como antagonista</li>
+                                <li><strong>Amor perdido:</strong> Tema universal con giro original</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Techniques Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Técnicas para Escribir Microrrelatos</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h4>Economía de Palabras</h4>
+                        <p>Cada palabra debe ser necesaria. Elimina adjetivos innecesarios, usa verbos fuertes y sustantivos precisos.</p>
+                        <div class="technique-example">
+                            <strong>Malo:</strong> "El perro muy grande y peludo corrió rápidamente"<br>
+                            <strong>Bueno:</strong> "El mastín se lanzó"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>Mostrar vs Contar</h4>
+                        <p>No digas que alguien está triste, muestra sus lágrimas. Las acciones revelan más que las descripciones.</p>
+                        <div class="technique-example">
+                            <strong>Contar:</strong> "Estaba muy nervioso"<br>
+                            <strong>Mostrar:</strong> "Sus manos temblaron al abrir la carta"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Final Impactante</h4>
+                        <p>El final debe sorprender, emocionar o hacer reflexionar. Es el momento de mayor impacto.</p>
+                        <div class="technique-example">
+                            <strong>Técnicas:</strong> Plot twist, revelación, ironía, pregunta abierta, imagen poética
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h4>El Iceberg</h4>
+                        <p>Solo muestra la punta. Deja que el lector imagine el resto de la historia.</p>
+                        <div class="technique-example">
+                            <strong>Técnica:</strong> Sugiere más de lo que dices explícitamente
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <h4>In Media Res</h4>
+                        <p>Comienza en medio de la acción. No hay tiempo para presentaciones largas.</p>
+                        <div class="technique-example">
+                            <strong>Ejemplo:</strong> "La bomba explotaría en 10 segundos cuando recordé dónde había dejado las llaves"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="technique-card">
+                        <div class="technique-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Emoción Única</h4>
+                        <p>Enfócate en una sola emoción o sensación. No trates de abarcar demasiado.</p>
+                        <div class="technique-example">
+                            <strong>Consejo:</strong> Miedo, amor, sorpresa, melancolía... elige una y profundiza
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Exercise -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="exercise-card">
+                        <h2 class="text-center mb-4">¡Practica Ahora!</h2>
+                        <p class="text-center mb-4">Escribe tu propio microrrelato basado en la imagen que aparece:</p>
+                        
+                        <div class="exercise-prompt" id="exercisePrompt">
+                            <div class="prompt-image">
+                                <svg width="200" height="150" viewBox="0 0 200 150">
+                                    <rect width="200" height="150" fill="#87CEEB"/>
+                                    <circle cx="170" cy="30" r="15" fill="#FFD700"/>
+                                    <path d="M20 120 Q50 80 80 120 Q110 80 140 120 Q170 80 200 120 L200 150 L0 150 Z" fill="#90EE90"/>
+                                    <rect x="90" y="100" width="20" height="30" fill="#8B4513"/>
+                                    <circle cx="100" cy="90" r="20" fill="#228B22"/>
+                                </svg>
+                            </div>
+                            <p class="prompt-text">Un árbol solitario en un campo verde bajo el sol...</p>
+                        </div>
+                        
+                        <div class="writing-area">
+                            <textarea id="microtaleInput" class="form-control" rows="4" 
+                                    placeholder="Escribe tu microrrelato aquí... (máximo 50 palabras)"></textarea>
+                            <div class="writing-stats mt-2">
+                                <span id="wordCount">0 palabras</span>
+                                <span class="mx-2">•</span>
+                                <span id="charCount">0 caracteres</span>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-primary me-2" onclick="generateNewPrompt()">
+                                    <i class="fas fa-sync-alt me-2"></i>Nueva Imagen
+                                </button>
+                                <button class="btn btn-success" onclick="downloadMicrotale()">
+                                    <i class="fas fa-download me-2"></i>Descargar Microrrelato
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Mundo de Historias. Creado con ❤️ para escritores creativos.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-light mt-2">
+                        <i class="fas fa-home me-2"></i>Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

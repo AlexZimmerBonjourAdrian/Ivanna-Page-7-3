@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatos de Historia - Mundo de Historias</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-magic me-2"></i>
+                <span class="brand-text">Mundo de Historias</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('microtales') }}">Microrrelatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('story_formats') }}">Formatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('interactive_guide') }}">Guía Interactiva</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="formats-hero">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="hero-content-formats">
+                        <i class="fas fa-book-open hero-icon"></i>
+                        <h1 class="hero-title">Formatos de Historia</h1>
+                        <p class="hero-subtitle">Descubre todos los tipos de narrativa y encuentra tu estilo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formats Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Microrrelatos -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('microrrelatos')">
+                        <div class="format-icon microrrelatos">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <h3>Microrrelatos</h3>
+                        <p class="format-length">1-300 palabras</p>
+                        <p class="format-description">Historias completas en muy pocas palabras. Máximo impacto narrativo.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">1</span>
+                                <span class="stat-label">página</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">< 1</span>
+                                <span class="stat-label">minuto</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Brevedad</span>
+                            <span class="characteristic">Intensidad</span>
+                            <span class="characteristic">Sorpresa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cuentos -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('cuentos')">
+                        <div class="format-icon cuentos">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Cuentos</h3>
+                        <p class="format-length">1,000-15,000 palabras</p>
+                        <p class="format-description">Narrativas cortas con desarrollo completo de personajes y trama.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">3-50</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">5-60</span>
+                                <span class="stat-label">minutos</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Unidad</span>
+                            <span class="characteristic">Concentración</span>
+                            <span class="characteristic">Impacto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Noveletas -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('noveletas')">
+                        <div class="format-icon noveletas">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <h3>Noveletas</h3>
+                        <p class="format-length">15,000-40,000 palabras</p>
+                        <p class="format-description">Formato intermedio entre cuento y novela corta.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">50-130</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">1-3</span>
+                                <span class="stat-label">horas</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Desarrollo</span>
+                            <span class="characteristic">Complejidad</span>
+                            <span class="characteristic">Profundidad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novelas Cortas -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('novelas-cortas')">
+                        <div class="format-icon novelas-cortas">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Novelas Cortas</h3>
+                        <p class="format-length">40,000-60,000 palabras</p>
+                        <p class="format-description">Narrativas extensas con múltiples tramas y personajes.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">130-200</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">3-5</span>
+                                <span class="stat-label">horas</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Múltiples tramas</span>
+                            <span class="characteristic">Personajes complejos</span>
+                            <span class="characteristic">Mundo amplio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novelas -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('novelas')">
+                        <div class="format-icon novelas">
+                            <i class="fas fa-journal-whills"></i>
+                        </div>
+                        <h3>Novelas</h3>
+                        <p class="format-length">60,000+ palabras</p>
+                        <p class="format-description">Obras extensas con desarrollo complejo de mundo y personajes.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label">horas</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Épicas</span>
+                            <span class="characteristic">Mundos ricos</span>
+                            <span class="characteristic">Múltiples arcos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guiones -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('guiones')">
+                        <div class="format-icon guiones">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>Guiones</h3>
+                        <p class="format-length">90-120 páginas</p>
+                        <p class="format-description">Narrativas escritas para medios audiovisuales.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">90-120</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">90-120</span>
+                                <span class="stat-label">minutos</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Visual</span>
+                            <span class="characteristic">Diálogos</span>
+                            <span class="characteristic">Acción</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poesía Narrativa -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('poesia-narrativa')">
+                        <div class="format-icon poesia-narrativa">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3>Poesía Narrativa</h3>
+                        <p class="format-length">Variable</p>
+                        <p class="format-description">Historias contadas a través de la forma poética.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">1-50</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">5-30</span>
+                                <span class="stat-label">minutos</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Ritmo</span>
+                            <span class="characteristic">Metáforas</span>
+                            <span class="characteristic">Musicalidad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historias Digitales -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('historias-digitales')">
+                        <div class="format-icon historias-digitales">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Historias Digitales</h3>
+                        <p class="format-length">Multimedia</p>
+                        <p class="format-description">Narrativas interactivas para medios digitales.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">Variable</span>
+                                <span class="stat-label">pantallas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">10-60</span>
+                                <span class="stat-label">minutos</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Interactividad</span>
+                            <span class="characteristic">Multimedia</span>
+                            <span class="characteristic">Inmersión</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crónicas -->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="format-card" onclick="showFormatDetailsAndTrack('cronicas')">
+                        <div class="format-icon cronicas">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3>Crónicas</h3>
+                        <p class="format-length">2,000-8,000 palabras</p>
+                        <p class="format-description">Narrativas periodísticas con técnicas literarias.</p>
+                        <div class="format-stats">
+                            <div class="stat-box">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="stat-number">6-25</span>
+                                <span class="stat-label">páginas</span>
+                            </div>
+                            <div class="stat-box">
+                                <i class="fas fa-clock"></i>
+                                <span class="stat-number">8-30</span>
+                                <span class="stat-label">minutos</span>
+                            </div>
+                        </div>
+                        <div class="format-characteristics">
+                            <span class="characteristic">Veracidad</span>
+                            <span class="characteristic">Narrativa</span>
+                            <span class="characteristic">Actualidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Format Details Modal -->
+    <div class="modal fade" id="formatModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formatModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="formatModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success" onclick="downloadFormatTemplate()">
+                        <i class="fas fa-download me-2"></i>Descargar Plantilla
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="tryFormat()">Intentar Este Formato</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Comparación de Formatos</h2>
+            
+            <div class="table-responsive">
+                <table class="table table-hover comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Formato</th>
+                            <th>Extensión</th>
+                            <th>Páginas</th>
+                            <th>Tiempo Lectura</th>
+                            <th>Personajes</th>
+                            <th>Tramas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Microrrelatos</strong></td>
+                            <td>1-300 palabras</td>
+                            <td>1 página</td>
+                            <td>< 1 minuto</td>
+                            <td>1-2</td>
+                            <td>1 simple</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuentos</strong></td>
+                            <td>1,000-15,000 palabras</td>
+                            <td>3-50 páginas</td>
+                            <td>5-60 minutos</td>
+                            <td>2-5</td>
+                            <td>1 principal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noveletas</strong></td>
+                            <td>15,000-40,000 palabras</td>
+                            <td>50-130 páginas</td>
+                            <td>1-3 horas</td>
+                            <td>3-8</td>
+                            <td>1-2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Novelas Cortas</strong></td>
+                            <td>40,000-60,000 palabras</td>
+                            <td>130-200 páginas</td>
+                            <td>3-5 horas</td>
+                            <td>5-12</td>
+                            <td>2-3</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Novelas</strong></td>
+                            <td>60,000+ palabras</td>
+                            <td>200+ páginas</td>
+                            <td>5+ horas</td>
+                            <td>10+</td>
+                            <td>Múltiples</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Mundo de Historias. Creado con ❤️ para escritores creativos.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-light mt-2 me-2">
+                        <i class="fas fa-home me-2"></i>Volver al Inicio
+                    </a>
+                    <a href="{{ url_for('interactive_guide') }}" class="btn btn-outline-light mt-2">
+                        <i class="fas fa-compass me-2"></i>Guía Interactiva
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
