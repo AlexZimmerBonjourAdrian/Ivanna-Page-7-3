@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva - Mundo de Historias</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-magic me-2"></i>
+                <span class="brand-text">Mundo de Historias</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/microtales">Microrrelatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/story-formats">Formatos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/interactive-guide">Guía Interactiva</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="guide-hero">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="hero-content-guide">
+                        <i class="fas fa-compass hero-icon"></i>
+                        <h1 class="hero-title">Guía Interactiva</h1>
+                        <p class="hero-subtitle">Aprende paso a paso a crear historias increíbles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="progress-wrapper">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 0%" id="progressBar"></div>
+                </div>
+                <div class="progress-labels">
+                    <span class="step-label" data-step="1">Idea</span>
+                    <span class="step-label" data-step="2">Personajes</span>
+                    <span class="step-label" data-step="3">Estructura</span>
+                    <span class="step-label" data-step="4">Escribir</span>
+                    <span class="step-label" data-step="5">Editar</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Steps -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Step 1: Idea Generation -->
+            <div class="step-card active" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2>Genera tu Idea</h2>
+                </div>
+                <div class="step-content">
+                    <p>Todo comienza con una chispa creativa. Usa estos generadores para encontrar inspiración:</p>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="idea-generator">
+                                <h4>¿Y si...?</h4>
+                                <div class="generator-output" id="whatIfOutput">
+                                    ¿Y si los sueños fueran memorias de vidas paralelas?
+                                </div>
+                                <button class="btn btn-outline-primary" onclick="generateWhatIf()">
+                                    <i class="fas fa-sync-alt"></i> Generar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="idea-generator">
+                                <h4>Situaciones</h4>
+                                <div class="generator-output" id="situationOutput">
+                                    Una persona encuentra un objeto que no debería existir
+                                </div>
+                                <button class="btn btn-outline-primary" onclick="generateSituation()">
+                                    <i class="fas fa-sync-alt"></i> Generar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="idea-generator">
+                                <h4>Primeras Líneas</h4>
+                                <div class="generator-output" id="firstLineOutput">
+                                    "El día que dejé de hacer sombra, nadie se dio cuenta."
+                                </div>
+                                <button class="btn btn-outline-primary" onclick="generateFirstLine()">
+                                    <i class="fas fa-sync-alt"></i> Generar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="idea-input mt-4">
+                        <label for="myIdea" class="form-label">Tu idea:</label>
+                        <textarea class="form-control" id="myIdea" rows="3" 
+                                placeholder="Escribe aquí la idea que más te inspire o combina varias..."></textarea>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Siguiente: Personajes <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Character Development -->
+            <div class="step-card" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2>Desarrolla tus Personajes</h2>
+                </div>
+                <div class="step-content">
+                    <p>Los personajes dan vida a tu historia. Vamos a crear personajes memorables:</p>
+                    
+                    <div class="character-builder">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Personaje Principal</h4>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="characterName" placeholder="Nombre del personaje">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Edad:</label>
+                                    <input type="number" class="form-control" id="characterAge" placeholder="Edad">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ocupación:</label>
+                                    <input type="text" class="form-control" id="characterJob" placeholder="¿A qué se dedica?">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Deseo principal:</label>
+                                    <input type="text" class="form-control" id="characterDesire" placeholder="¿Qué quiere más que nada?">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mayor miedo:</label>
+                                    <input type="text" class="form-control" id="characterFear" placeholder="¿Qué es lo que más teme?">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Detalles del Personaje</h4>
+                                <div class="trait-selector">
+                                    <label class="form-label">Personalidad:</label>
+                                    <div class="trait-options">
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Introvertido</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Extrovertido</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Analítico</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Impulsivo</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Empático</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'personality')">Pragmático</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="trait-selector mt-3">
+                                    <label class="form-label">Defecto principal:</label>
+                                    <div class="trait-options">
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Orgulloso</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Temeroso</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Mentiroso</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Indeciso</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Vengativo</button>
+                                        <button class="trait-btn" onclick="selectTrait(this, 'flaw')">Ingenuo</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="character-summary mt-4">
+                                    <h5>Resumen del Personaje:</h5>
+                                    <div id="characterSummary" class="summary-box">
+                                        Completa los campos para ver un resumen de tu personaje...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="previousStep()">
+                        <i class="fas fa-arrow-left me-2"></i> Anterior
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Siguiente: Estructura <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Story Structure -->
+            <div class="step-card" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2>Estructura tu Historia</h2>
+                </div>
+                <div class="step-content">
+                    <p>Una buena estructura es la columna vertebral de tu historia. Elige el formato que mejor se adapte a tu idea:</p>
+                    
+                    <div class="structure-selector">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="structure-option" onclick="selectStructure('microtale')">
+                                    <h4><i class="fas fa-feather-alt"></i> Microrrelato</h4>
+                                    <p>Inicio impactante → Desarrollo mínimo → Final sorprendente</p>
+                                    <span class="structure-words">1-300 palabras</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="structure-option" onclick="selectStructure('short-story')">
+                                    <h4><i class="fas fa-book"></i> Cuento Clásico</h4>
+                                    <p>Presentación → Desarrollo → Clímax → Desenlace</p>
+                                    <span class="structure-words">1,000-15,000 palabras</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="structure-option" onclick="selectStructure('hero-journey')">
+                                    <h4><i class="fas fa-route"></i> Viaje del Héroe</h4>
+                                    <p>Llamada → Aventura → Transformación → Retorno</p>
+                                    <span class="structure-words">Cualquier extensión</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="structure-option" onclick="selectStructure('three-act')">
+                                    <h4><i class="fas fa-layer-group"></i> Tres Actos</h4>
+                                    <p>Acto I (25%) → Acto II (50%) → Acto III (25%)</p>
+                                    <span class="structure-words">Guiones y novelas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="structure-detail" id="structureDetail">
+                        <h5>Selecciona una estructura para ver los detalles</h5>
+                    </div>
+                    
+                    <div class="structure-planner mt-4" id="structurePlanner" style="display: none;">
+                        <h5>Planifica tu historia:</h5>
+                        <div id="plannerContent"></div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="previousStep()">
+                        <i class="fas fa-arrow-left me-2"></i> Anterior
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Siguiente: Escribir <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Writing -->
+            <div class="step-card" id="step4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2>¡A Escribir!</h2>
+                </div>
+                <div class="step-content">
+                    <p>Ahora viene la parte más emocionante: dar vida a tu historia. Usa las herramientas de apoyo:</p>
+                    
+                    <div class="writing-tools">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="writing-area">
+                                    <div class="writing-toolbar">
+                                        <button class="tool-btn" onclick="insertTemplate('dialogue')" title="Insertar diálogo">
+                                            <i class="fas fa-comment"></i>
+                                        </button>
+                                        <button class="tool-btn" onclick="insertTemplate('description')" title="Insertar descripción">
+                                            <i class="fas fa-image"></i>
+                                        </button>
+                                        <button class="tool-btn" onclick="insertTemplate('action')" title="Insertar acción">
+                                            <i class="fas fa-running"></i>
+                                        </button>
+                                        <button class="tool-btn" onclick="insertTemplate('emotion')" title="Insertar emoción">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="tool-btn" onclick="saveStory()" title="Guardar en navegador">
+                                            <i class="fas fa-save"></i>
+                                        </button>
+                                        <button class="tool-btn" onclick="downloadStory()" title="Descargar historia">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <textarea id="storyEditor" class="form-control story-editor" rows="15" 
+                                            placeholder="Comienza a escribir tu historia aquí..."></textarea>
+                                    <div class="writing-stats">
+                                        <span id="storyWordCount">0 palabras</span>
+                                        <span class="mx-2">•</span>
+                                        <span id="storyCharCount">0 caracteres</span>
+                                        <span class="mx-2">•</span>
+                                        <span id="readingTime">0 min de lectura</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="writing-tips">
+                                    <h5><i class="fas fa-lightbulb me-2"></i>Consejos mientras escribes:</h5>
+                                    <ul id="writingTips">
+                                        <li>Comienza con una primera línea que enganche</li>
+                                        <li>Muestra, no digas (show don't tell)</li>
+                                        <li>Cada palabra debe tener un propósito</li>
+                                        <li>Lee en voz alta para mejorar el ritmo</li>
+                                        <li>No te detengas a editar, termina el primer borrador</li>
+                                    </ul>
+                                    
+                                    <div class="word-suggester">
+                                        <h6>Generador de palabras:</h6>
+                                        <div class="word-categories">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="suggestWords('emotions')">Emociones</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="suggestWords('actions')">Acciones</button>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="suggestWords('descriptions')">Descripciones</button>
+                                        </div>
+                                        <div id="suggestedWords" class="suggested-words mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="previousStep()">
+                        <i class="fas fa-arrow-left me-2"></i> Anterior
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Siguiente: Editar <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 5: Editing -->
+            <div class="step-card" id="step5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h2>Pulir y Perfeccionar</h2>
+                </div>
+                <div class="step-content">
+                    <p>¡Excelente trabajo! Ahora vamos a pulir tu historia para que brille:</p>
+                    
+                    <div class="editing-tools">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checklist-card">
+                                    <h5><i class="fas fa-check-circle me-2"></i>Lista de Verificación</h5>
+                                    <div class="checklist">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check1">
+                                            <label class="form-check-label" for="check1">
+                                                ¿La primera línea engancha al lector?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check2">
+                                            <label class="form-check-label" for="check2">
+                                                ¿Cada párrafo aporta a la historia?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check3">
+                                            <label class="form-check-label" for="check3">
+                                                ¿Los personajes son consistentes?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check4">
+                                            <label class="form-check-label" for="check4">
+                                                ¿El final satisface al lector?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check5">
+                                            <label class="form-check-label" for="check5">
+                                                ¿Eliminé palabras innecesarias?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="check6">
+                                            <label class="form-check-label" for="check6">
+                                                ¿Revisé gramática y ortografía?
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="improvement-suggestions">
+                                    <h5><i class="fas fa-magic me-2"></i>Sugerencias de Mejora</h5>
+                                    <button class="btn btn-outline-primary mb-2" onclick="analyzeStory()">
+                                        <i class="fas fa-search me-2"></i>Analizar mi Historia
+                                    </button>
+                                    <div id="analysisResults" class="analysis-results">
+                                        Haz clic en "Analizar mi Historia" para recibir sugerencias personalizadas.
+                                    </div>
+                                </div>
+                                
+                                <div class="final-actions mt-4">
+                                    <h5><i class="fas fa-flag-checkered me-2"></i>Historia Completada</h5>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-success" onclick="downloadStory()">
+                                            <i class="fas fa-download me-2"></i>Descargar Historia
+                                        </button>
+                                        <button class="btn btn-info" onclick="shareStory()">
+                                            <i class="fas fa-share me-2"></i>Compartir
+                                        </button>
+                                        <button class="btn btn-warning" onclick="startNewStory()">
+                                            <i class="fas fa-plus me-2"></i>Nueva Historia
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="previousStep()">
+                        <i class="fas fa-arrow-left me-2"></i> Anterior
+                    </button>
+                    <button class="btn btn-success" onclick="completeGuide()">
+                        <i class="fas fa-trophy me-2"></i> ¡Historia Completada!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Mundo de Historias. Creado con ❤️ para escritores creativos.</p>
+                    <a href="/" class="btn btn-outline-light mt-2 me-2">
+                        <i class="fas fa-home me-2"></i>Volver al Inicio
+                    </a>
+                    <a href="/microtales" class="btn btn-outline-light mt-2">
+                        <i class="fas fa-feather-alt me-2"></i>Ver Microrrelatos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
